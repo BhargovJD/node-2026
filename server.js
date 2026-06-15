@@ -1,58 +1,47 @@
-console.log("Server is runnug...");
+// Import the Express framework.
+// Express helps us create web servers easily.
+const express = require('express')
 
-(function(){
-    console.log("Function without calling.")
-})();
+// Create an Express application instance.
+// The 'app' object will be used to define routes and start the server.
+const app = express()
 
+// Define a GET route for the root URL '/'.
+// When someone visits http://localhost:3000/,
+// this function will execute.
+app.get('/', (req, res) => {
 
-// Callback function:
-// A callback function is simply a function passed as an argument to another function and executed later.
-function greet(name, callback) {
-console.log("Hello " + name);
-callback();
-}
-
-function sayBye() {
-console.log("Goodbye!");
-}
-
-greet("Bhargov", sayBye);
+// Send a response back to the browser.
+// The browser will display "Hello World".
+res.send('Hello World')
+})
 
 
-// OS module
-const os = require('os'); 
-const userInfo = os.userInfo();
-console.log(userInfo);
+app.get('/chicken', (req, res) => {
+res.send('Hello Chicken')
+})
 
 
-// File system module: with callback function
-const fs = require('fs');
-fs.appendFile('sample.txt', '\nHello Bhargov!', (err) => {
-if (err) {
-console.log(err);
-return;
-}
+// Route: GET /user
+app.get('/user', (req, res) => {
 
-console.log('Content added successfully');
+// Send JSON response
+res.json({
+    id: 1,
+    name: 'Bhargov',
+    age: 30,
+    city: 'Guwahati'
+});
 
 });
 
 
 
-// import file
-const notes = require('./notes.js');
+// Start the server and listen on port 3000.
+// The callback function runs once the server starts successfully.
+app.listen(3000, () => {
 
-console.log(notes.age)
-
-
-
-// Lodash
-// Lodash is a popular JavaScript utility library 
-// that provides helpful functions for working with arrays, objects, strings, and data manipulation.
-var _ = require('lodash');
-
-
-const arr = [1, 2, 2, 3, 3, 4];
-
-console.log(_.uniq(arr));
-
+// Print a message in the terminal indicating
+// that the server is running.
+console.log('Server is running on http://localhost:3000')
+})
